@@ -1,0 +1,15 @@
+pkg/
+Gemfile.lock
+.ruby-version
+.rspec_system
+.bundle
+.vagrant
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# C extensions
+*.so
+
+.secrets
