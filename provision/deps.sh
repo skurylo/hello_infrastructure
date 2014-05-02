@@ -1,2 +1,2 @@
 #!/bin/bash
-apt-get install -y unzip
+apt-get install -y unzip daemon

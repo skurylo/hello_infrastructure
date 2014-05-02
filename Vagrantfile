@@ -26,13 +26,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           '--memory', memory.to_s
         ]
       end
-      config.vm.provision "shell", path: "provision/deps.sh"
-      config.vm.provision "shell", path: "provision/consul.sh"
-      config.vm.provision "shell" do |s|
+      node_config.vm.provision "shell", path: "provision/deps.sh"
+      node_config.vm.provision "shell", path: "provision/consul.sh"
+      args = "-bind=#{node[:ip]}"
+      if node[:hostname] == 'node1'
+        args = args + ' -bootstrap'
+      else
+        args = args + ' -join=172.16.32.10'
+      end
+      node_config.vm.provision "shell" do |s|
         s.path = "provision/consul-start.sh"
-        if node[:hostname] == 'node1'
-          s.args = '-bootstrap'
-        end
+        s.args = args
       end
     end
   end

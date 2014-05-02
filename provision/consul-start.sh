@@ -1,5 +1,5 @@
 #!/bin/bash
 
-nohup /usr/local/bin/consul agent -server -data-dir /tmp/consul $@ 2>&1 |tee /var/log/consul.log &
-# Sleep so we see some output
-sleep 5
+/usr/bin/daemon -n consul --env GOMAXPROCS=2 --output=/var/log/consul.log -- /usr/local/bin/consul agent -server -data-dir /tmp/consul $@
+sleep 2
+cat /var/log/consul.log
