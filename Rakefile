@@ -1,4 +1,6 @@
 Rake::TaskManager.record_task_metadata = true
+# Add lib to search path
+$:.unshift(File.expand_path('../lib', __FILE__))
 # Load rake tasks
 Dir.glob('lib/tasks/*.rake').each { |r| load r }
 
