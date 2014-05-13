@@ -8,3 +8,7 @@ else
 fi
 chmod +x consul
 mv consul /usr/local/bin/consul
+
+cp /vagrant/consul/consul.init /etc/init.d/consul
+chmod +x /etc/init.d/consul
+update-rc.d consul defaults

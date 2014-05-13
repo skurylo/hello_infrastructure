@@ -28,12 +28,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       end
       node_config.vm.provision "shell", path: "provision/deps.sh"
       node_config.vm.provision "shell", path: "provision/consul.sh"
-      args = "-bind=#{node[:ip]}"
+      args = ''
       if node[:hostname] == 'node1'
-        args = args + ' -bootstrap'
-      else
-        args = args + ' -join=172.16.32.10'
+        args = args + '-bootstrap'
       end
+      # Fix args with new initscript
+      #args = "-bind=#{node[:ip]}"
+      #TODO Fix join with new init script
+      #else
+      #  args = args + ' -join=172.16.32.10'
+      #end
       node_config.vm.provision "shell" do |s|
         s.path = "provision/consul-start.sh"
         s.args = args
